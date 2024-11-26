@@ -1,0 +1,33 @@
+html{
+    margin:0;
+    padding: 0;
+}
+
+#gameContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    gap:25px;
+}
+
+#gameboard{
+    width: 320px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap:10px;
+}
+
+.square{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100px;
+    height:100px;
+    border: 2px solid black;
+    font-size: 5rem;
+    padding: 0;
+}
