@@ -9,7 +9,7 @@ const displayController = (() => {
     return {
         renderMessage,
     };
-})();
+})();//firt parenthesis contains the whole function, second call the return function in the function
 
 // Gameboard Module: Manages the tic-tac-toe gameboard.
 const Gameboard = (() => {
@@ -137,7 +137,7 @@ const Game = (() => {
 })();
 
 // checkForWin Function: Checks if the current player has won the game.
-function checkForWin(board) {
+function checkForWin(board, mark) {
     // List of all possible winning combinations (rows, columns, diagonals).
     const winningCombinations = [
         [0, 1, 2],
@@ -154,7 +154,7 @@ function checkForWin(board) {
     for (let i = 0; i < winningCombinations.length; i++) {
         const [a, b, c] = winningCombinations[i]; // Get the three indices of the combination.
         // If all three squares in the combination have the same mark, it's a win!
-        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        if (board[a] === mark && board[b] === mark && board[c] === mark) {
             return true;
         }
     }
