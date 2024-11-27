@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel="stylesheet">
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
     <div id="gameContainer">
-        <h1>Tic-Tac-Toe</h1>
+        <h1><span class="noText">Tic</span>-<span class="xText">Tac</span>-<span class="oText">Toe</span></h1>
+        <div id="message" class="noText"></div>
         <div id="gameboard"></div>
         <div id="controls">
             <input type="text" id="player1" placeholder="Player 1 Name">
@@ -16,7 +18,6 @@
             <button id="start-button">Start Game</button>
             <button id="restart-button">Restart Game</button>
         </div>
-        <div id="message"></div>
         <div id="result-display"></div>
     </div>
 </body>

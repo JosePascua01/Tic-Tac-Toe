@@ -1,33 +1,160 @@
-html{
-    margin:0;
+* {
+    font-family: 'Nunito';
+}
+
+html {
+    margin: 0;
     padding: 0;
 }
 
-#gameContainer{
+body {
+    background-color: black;
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+#gameContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: auto;
-    gap:25px;
+    gap: 25px;
 }
 
-#gameboard{
+h1 {
+    font-size: 50px;
+}
+
+#gameboard {
     width: 320px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap:10px;
+    gap: 10px;
 }
 
-.square{
+#message {
+    text-align: center;
+    font-size: 24px;
+    height: 65.6px;
+}
+
+input {
+    text-align: center;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    width: 150px;
+    font-size: 15px;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+button {
+    text-align: center;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    width: 150px;
+    font-size: 15px;
+    border: 3px solid white;
+    border-radius: 10px;
+    text-shadow:
+        0 0 8px #000000,
+        0 0 7px #fff,
+        0 0 7px #bc13fe,
+        0 0 14px #bc13fe,
+        0 0 21px #bc13fe,
+        0 0 108px #bc13fe;
+}
+
+#player1{
+    text-shadow:
+    0 0 8px #000000,
+    0 0 7px #fff,
+    0 0 7px #0ff0fc,
+    0 0 14px #0ff0fc,
+    0 0 21px #0ff0fc,
+    0 0 108px #0ff0fc;
+}
+
+#player2{
+    text-shadow:
+        0 0 8px #000000,
+        0 0 7px #fff,
+        0 0 7px #ff5e00,
+        0 0 14px #ff5e00,
+        0 0 21px #ff5e00,
+        0 0 108px #ff5e00;
+}
+
+::placeholder {
+    color: white;
+}
+
+.square {
     display: flex;
     align-items: center;
     justify-content: center;
-    width:100px;
-    height:100px;
-    border: 2px solid black;
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
     font-size: 5rem;
-    padding: 0;
+    border-radius: 10px;
+}
+
+.noMark {
+    box-shadow: 0 0 .2rem #fff,
+        0 0 0.2rem #fff,
+        0 0 1rem #bc13fe,
+        0 0 0.4rem #bc13fe,
+        inset 0 0 1.3rem #bc13fe;
+}
+
+.noText {
+    text-shadow:
+        0 0 8px #000000,
+        0 0 7px #fff,
+        0 0 7px #bc13fe,
+        0 0 14px #bc13fe,
+        0 0 21px #bc13fe,
+        0 0 108px #bc13fe;
+}
+
+.xMark {
+    box-shadow: 0 0 .2rem #fff,
+        0 0 0.2rem #fff,
+        0 0 1rem #0ff0fc,
+        0 0 0.4rem #0ff0fc,
+        inset 0 0 1.3rem #0ff0fc;
+}
+
+.xText {
+    text-shadow:
+        0 0 8px #000000,
+        0 0 7px #fff,
+        0 0 7px #0ff0fc,
+        0 0 14px #0ff0fc,
+        0 0 21px #0ff0fc,
+        0 0 108px #0ff0fc;
+}
+
+.oMark {
+    box-shadow: 0 0 .2rem #fff,
+        0 0 0.2rem #fff,
+        0 0 1rem #ff5e00,
+        0 0 0.4rem #ff5e00,
+        inset 0 0 1.3rem #ff5e00;
+}
+
+.oText {
+    text-shadow:
+        0 0 8px #000000,
+        0 0 7px #fff,
+        0 0 7px #ff5e00,
+        0 0 14px #ff5e00,
+        0 0 21px #ff5e00,
+        0 0 108px #ff5e00;
 }

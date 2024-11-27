@@ -24,7 +24,7 @@ const Gameboard = (() => {
         gameboard.forEach((square, index) => {
             // Add a <div> for each square with a class and an ID.
             boardHTML += `
-            <div class="square" id="square-${index}">${square}</div>
+            <div class="square ${square === "" ? "noMark" : square === "X" ? "xMark xText" : "oMark oText"}" id="square-${index}">${square}</div>
             `;
         });
 
@@ -63,19 +63,25 @@ const createPlayer = (name, mark) => {
 // Game Module: Manages the overall game logic and player turns.
 const Game = (() => {
     let players = []; // Array to hold the two players.
-    let currentPlayerIndex; // Tracks whose turn it is (0 for Player 1, 1 for Player 2).
+    let currentPlayerIndex; // Tracks whose turn it is (0   for Player 1, 1 for Player 2).
     let gameOver; // Boolean flag to track if the game has ended.
+    let playerMoves;
 
     // Start Function: Initializes the game with player names and marks.
     const start = () => {
         // Create two players using the names entered in the input fields.
         players = [
-            createPlayer(document.querySelector("#player1").value, "X"), // Player 1 is X.
-            createPlayer(document.querySelector("#player2").value, "O"), // Player 2 is O.
+            createPlayer(document.querySelector("#player1").value === "" ? "Player 1" : document.querySelector("#player1").value, "X"), // Player 1 is X.
+            createPlayer(document.querySelector("#player2").value === "" ? "Player 2" : document.querySelector("#player2").value, "O"), // Player 2 is O.
         ];
 
         currentPlayerIndex = 0; // Start with Player 1's turn.
         gameOver = false; // The game is not over yet.
+        playerMoves = [[], []]; // Initialize empty arrays for both players.
+        
+        const currentPlayer = players[currentPlayerIndex];
+        const currentPlayerMarks = playerMoves[currentPlayerIndex];
+        displayController.renderMessage(`Game starts with <br><span class="xText">${currentPlayer.name}'s turn</span>`);
 
         Gameboard.render(); // Show the empty gameboard on the webpage.
 
@@ -100,14 +106,25 @@ const Game = (() => {
             return;
         }
 
+        const currentPlayer = players[currentPlayerIndex];
+        const currentPlayerMarks = playerMoves[currentPlayerIndex];
+        displayController.renderMessage(`<span class="${players[currentPlayerIndex === 0 ? 1 : 0].mark.toLowerCase()}Text"> ${players[currentPlayerIndex === 0 ? 1 : 0].name}'s turn</span>`);
+
         // Update the square with the current player's mark.
-        Gameboard.update(index, players[currentPlayerIndex].mark);
+        Gameboard.update(index, currentPlayer.mark);
+
+        // Manage the "only three tiles" rule
+        currentPlayerMarks.push(index); // Add the new mark to the player's moves array
+        if (currentPlayerMarks.length > 3) {
+            const firstMarkedIndex = currentPlayerMarks.shift(); // Remove the first mark
+            Gameboard.update(firstMarkedIndex, ""); // Erase the first mark from the gameboard
+        }
 
         // Check if the current player won.
-        if (checkForWin(Gameboard.getGameBoard(), players[currentPlayerIndex].mark)) {
+        if (checkForWin(Gameboard.getGameBoard(), currentPlayer.mark)) {
             gameOver = true; // Set the gameOver flag.
-            displayController.renderMessage(`${players[currentPlayerIndex].name} won!`); // Show a win message.
-        } 
+            displayController.renderMessage(`${currentPlayer.name} won!`); // Show a win message.
+        }
         // Check if the game is a tie.
         else if (checkForTie(Gameboard.getGameBoard())) {
             gameOver = true; // Set the gameOver flag.
@@ -125,6 +142,7 @@ const Game = (() => {
         }
         Gameboard.render(); // Re-render the cleared board.
         gameOver = false; // Reset the gameOver flag.
+        playerMoves = [[], []];
         document.querySelector("#message").innerHTML = ""; // Clear the message.
     };
 
@@ -135,6 +153,7 @@ const Game = (() => {
         restart,
     };
 })();
+
 
 // checkForWin Function: Checks if the current player has won the game.
 function checkForWin(board, mark) {
@@ -176,5 +195,6 @@ restartButton.addEventListener("click", () => {
 // Start Button: When clicked, start the game.
 const startButton = document.querySelector("#start-button");
 startButton.addEventListener("click", () => {
+    startButton.style.display = "none";
     Game.start();
 });
